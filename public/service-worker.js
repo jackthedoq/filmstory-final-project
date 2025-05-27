@@ -18,6 +18,8 @@ const FILES_TO_CACHE = [
   '${BASE}/scripts/presenters/auth-presenter.js',
   '${BASE}/scripts/presenters/detail-presenter.js',
   '${BASE}/scripts/presenters/add-story-presenter.js',
+  '${BASE}/scripts/presenters/notfound-presenter.js',
+  '${BASE}/scripts/presenters/manifest.json',
   '${BASE}/movie-128.png',
   '${BASE}/movie-192.png',
   '${BASE}/movie-512.png',
