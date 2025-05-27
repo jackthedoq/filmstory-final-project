@@ -1,1 +1,0 @@
-API Key Mapbox: pk.eyJ1IjoiZXhhbXBsZS11c2VyIiwiYSI6ImNsb2hkbHY1bTAwMGoyam8ydWU1dWl6NnYifQ.abc123def456
