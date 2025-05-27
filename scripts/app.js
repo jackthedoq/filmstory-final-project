@@ -198,7 +198,7 @@ function urlBase64ToUint8Array(base64String) {
 if ('serviceWorker' in navigator && 'PushManager' in window) {
   window.addEventListener('load', async () => {
     try {
-      const reg = await navigator.serviceWorker.register('/service-worker.js');
+      const reg = await navigator.serviceWorker.register('/filmstory-final-project/service-worker.js');
       console.log('✅ Service Worker registered:', reg);
 
       const existingSubscription = await reg.pushManager.getSubscription();
