@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/filmstory-final-project/',
+  base: './',
   publicDir: 'public',
   build: {
     outDir: 'dist'
