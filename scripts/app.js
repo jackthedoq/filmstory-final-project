@@ -2,6 +2,7 @@
 
 import { saveStory, getAllStories } from './utils/indexeddb.js';
 
+import '../styles/main.css';
 
 import LoginView from './views/login-view.js';
 import RegisterView from './views/register-view.js';
@@ -12,6 +13,8 @@ import AuthPresenter from './presenters/auth-presenter.js';
 import HomePresenter from './presenters/home-presenter.js';
 import AddStoryPresenter from './presenters/add-story-presenter.js';
 import DetailPresenter from './presenters/detail-presenter.js';
+import NotFoundView from './views/notfound-view.js';
+
 
 class App {
 
@@ -26,7 +29,8 @@ class App {
             addStory: new AddStoryView(),
             detail: new DetailView(),
             login: new LoginView(),
-            register: new RegisterView()
+            register: new RegisterView(),
+            notfound: new NotFoundView()
         };
 
         this._presenters = {
@@ -111,14 +115,15 @@ class App {
 
             default:
                 if (hash.startsWith('#/detail/')) {
-                    const id = hash.split('/')[2];
-                    this._currentPresenter = this._presenters.detail;
-                    this._presenters.detail.showStory(id);
+                  const id = hash.split('/')[2];
+                  this._currentPresenter = this._presenters.detail;
+                  this._presenters.detail.showStory(id);
                 } else {
-                    this._currentPresenter = null;
-                    window.location.hash = '#/home';
+                  mainElement.innerHTML = this._views.notfound.render();
+                  this._currentPresenter = null;
                 }
                 break;
+
         }
     }
 
@@ -163,7 +168,6 @@ class App {
 }
 
 
-
 // Tambahan aksesibilitas untuk "skip to content"
 document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.querySelector("#main-content");
@@ -206,7 +210,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
       const subscription = await reg.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(
-          'BLepspYY6vkKpZ6ZOUxt_2UKZUgA9zMqFS-wPLUwH8dUYaAk__dR0xRzB8YtXFL28b7Z1JSpOAFyOaZBaJxRJkA'
+          'BJQjAMpxWGi5oLOx-42CvpCrtRC1EEd7RgBZ9njuMUXcgDmajNvESbeBZfx_hkDLBtux6mM0inl7dHjbrg9C-MY'
         )
       });
 

@@ -430,3 +430,19 @@ textarea.form-control {
   height: 300px;
 }
 
+.notfound {
+  padding: 2rem;
+  text-align: center;
+}
+
+.notfound h2 {
+  color: red;
+}
+
+.notfound a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #4CAF50;
+}
+
+
