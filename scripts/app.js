@@ -201,13 +201,20 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
       const reg = await navigator.serviceWorker.register('/service-worker.js');
       console.log('✅ Service Worker registered:', reg);
 
-      const existingSubscription = await reg.pushManager.getSubscription();
+      const readyReg = await navigator.serviceWorker.ready;
+
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') {
+        throw new Error('🔕 Permission not granted for notifications');
+      }
+
+      const existingSubscription = await readyReg.pushManager.getSubscription();
       if (existingSubscription) {
         await existingSubscription.unsubscribe();
         console.log('🔁 Existing subscription unsubscribed');
       }
 
-      const subscription = await reg.pushManager.subscribe({
+      const subscription = await readyReg.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(
           'BJQjAMpxWGi5oLOx-42CvpCrtRC1EEd7RgBZ9njuMUXcgDmajNvESbeBZfx_hkDLBtux6mM0inl7dHjbrg9C-MY'
@@ -215,8 +222,18 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
       });
 
       console.log('🔔 Push Subscription:', JSON.stringify(subscription));
-    } catch (err) {
-      console.error('❌ SW/Push Error:', err);
+
+      await fetch('http://localhost:8000/save-subscription', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(subscription)
+      });
+
+      console.log('✅ Subscription dikirim ke server!');
+    } catch (error) {
+      console.error('❌ Service Worker or Push setup failed:', error);
     }
   });
 }
