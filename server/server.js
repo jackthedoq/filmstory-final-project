@@ -9,7 +9,7 @@ import cors from 'cors';
 const { setVapidDetails, sendNotification } = webpush;
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 setVapidDetails(
   'mailto:301103aajr@gmail.com',
