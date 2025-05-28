@@ -15,6 +15,11 @@ class AddStoryPresenter {
     async _addStory({ description, photo, lat, lon }) {
         try {
             await StoryApi.addStory({ description, photo, lat, lon });
+
+            await fetch('http://localhost:8000/send-notification', {
+                method: 'POST'
+            });
+
             this._view.showSuccessNotification("Cerita berhasil dikirim!");
         } catch (error) {
             this._view.showError(error.message || 'Terjadi kesalahan saat mengirim cerita');
